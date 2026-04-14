@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Under Construction</title>
+
+<!-- Google Font for Logo -->
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+    /* Root palette (minimal version) */
+    :root {
+        --emerald-green: #2efc7a;
+        --green-glow: #1a4a38;
+        --charcoal: #111418;
+    }
+
+    body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: var(--charcoal);
+        color: #e8e8e8;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    /* Navbar */
+    .navbar {
+        width: 100%;
+        padding: 1rem 2rem;
+        display: flex;
+        align-items: center;
+        background: #15181d;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        box-shadow: 0 0 12px rgba(0,0,0,0.4);
+    }
+
+    .logo {
+        font-family: "Pacifico", cursive;
+        font-size: 1.7rem;
+        font-weight: 700;
+        color: var(--emerald-green);
+        text-shadow: 0 0 6px var(--green-glow);
+        text-decoration: none;
+    }
+
+    /* Centered content */
+    .container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 2rem;
+    }
+
+    .message {
+        font-size: 2rem;
+        line-height: 1.4;
+    }
+
+    .emoji {
+        font-size: 3.5rem;
+        display: block;
+        margin-bottom: 1rem;
+    }
+</style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">GR</a>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="message">
+            <span class="emoji">🚧</span>
+            This page is currently under construction. Click my logo to return to the home page.
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,290 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+/* ------------------------------
+   GLOBAL RESET + BASE STYLES
+--------------------------------*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background: #111418; /* softer charcoal */
+    color: #e4e9e7;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Softened neon palette */
+:root {
+    --soft-pink: #ffb3e1;
+    --panel-bg: #1a1d23;
+    --panel-border: #2a2f38;
+    --rose-neon: #da7b93;
+    --rose-glow: rgba(255, 122, 191, 0.45);
+    --emerald-green: #3dfc89;
+    --green-glow: #1a4a38;
+}
+
+/* ------------------------------
+   NAVBAR
+--------------------------------*/
+.navbar {
+    width: 100%;
+    padding: 1.2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #15181d;
+    border-bottom: 1px solid var(--rose-neon);
+    box-shadow: 0 0 12px var(--rose-glow);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-family: "Pacifico", cursive;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--emerald-green);
+    text-shadow: 0 0 6px var(--green-glow);
+}
+
+.nav-center {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+}
+
+.nav-link {
+    color: #d0d0d0;
+    text-decoration: none;
+    font-size: 1.1rem;
+    position: relative;
+    transition: 0.3s ease;
+}
+
+/* Soft neon underline */
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 2px;
+    background: var(--rose-neon);
+    box-shadow: 0 0 8px var(--rose-glow);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--rose-neon);
+    text-shadow: 0 0 6px var(--rose-neon);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.contact-btn {
+    padding: 0.6rem 1.2rem;
+    background: var(--rose-neon);
+    color: #111;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 0 10px var(--rose-glow);
+    transition: 0.3s ease;
+}
+
+.contact-btn:hover {
+    background: var(--emerald-green);
+    box-shadow: 0 0 14px var(--green-glow);
+    transform: translateY(-2px);
+}
+
+/* ------------------------------
+   HERO SECTION
+--------------------------------*/
+.hero {
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.hero-photo {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 1.5rem;
+
+    border: 3px solid var(--rose-neon);
+    box-shadow: 0 0 14px var(--rose-glow);
+}
+
+.hero-title {
+    position: relative;
+    text-align: left;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.hero-title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 60%;
+    height: 3px;
+    background: var(--rose-neon);
+    box-shadow: 0 0 8px var(--rose-glow);
+    border-radius: 2px;
+}
+
+
+/* ------------------------------
+   SECTION TITLES
+--------------------------------*/
+.section {
+    padding: 4rem 3rem;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--rose-neon);
+    text-shadow: 0 0 10px var(--rose-glow);
+}
+
+/* ------------------------------
+   FEATURED WORK
+--------------------------------*/
+.about-summary {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 3rem;
+    color: #cfcfcf;
+}
+
+.featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+}
+
+.featured-card {
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: 0.25s ease;
+    box-shadow: 0 0 12px rgba(185, 146, 255, 0.15);
+}
+
+.featured-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.featured-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 18px rgba(185, 146, 255, 0.25);
+}
+
+.featured-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--panel-border);
+}
+
+.featured-info {
+    padding: 1rem;
+    text-align: center;
+}
+
+/* ------------------------------
+   PROJECT / EXTRAS / TRAVEL CARDS
+--------------------------------*/
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+    padding: 1.5rem;
+    border-radius: 10px;
+
+    background: var(--panel-bg);
+    border: 1px solid var(--rose-neon);
+    box-shadow: 0 0 12px var(--rose-glow);
+
+    transition: 0.25s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    border-color: var(--emerald-green);
+    box-shadow: 0 0 18px var(--green-glow);
+}
+
+.card-logo {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1rem;
+    object-fit: contain;
+}
+
+.travel-card {
+    font-size: 1.3rem;
+    padding: 2.5rem 1rem;
+    font-weight: 600;
+}
+
+/* ------------------------------
+   FOOTER
+--------------------------------*/
+.footer {
+    padding: 3rem;
+    text-align: center;
+    background: #15181d;
+    border-top: 1px solid var(--panel-border);
+    box-shadow: 0 0 12px rgba(185, 146, 255, 0.15);
+}
+
+.footer a {
+    color: var(--rose-neon);
+    text-decoration: underline;
+}
+
+/* ------------------------------
+   RESPONSIVE TWEAKS
+--------------------------------*/
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav-center {
+        gap: 1.5rem;
+    }
+
+    .hero-title {
+        font-size: 1.4rem;
+    }
+}
