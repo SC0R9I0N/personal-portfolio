@@ -256,7 +256,9 @@ img {
     font-weight: 600;
 }
 
-/* CHANGELOG */
+/* ------------------------------
+   CHANGELOG
+--------------------------------*/
 .changelog-scroll-container {
     max-width: 700px;
     margin: 0 auto;
@@ -272,7 +274,6 @@ img {
     scrollbar-color: var(--rose-neon) rgba(218, 123, 147, 0.1);
 }
 
-/* Webkit browsers (Chrome, Safari, Edge) */
 .changelog-scroll-container::-webkit-scrollbar {
     width: 8px;
 }
