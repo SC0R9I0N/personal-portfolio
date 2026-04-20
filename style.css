@@ -256,6 +256,33 @@ img {
     font-weight: 600;
 }
 
+/* CHANGELOG */
+.changelog {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.changelog-entry {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1rem;
+    border-left: 2px solid var(--rose-neon);
+    margin-bottom: 0.5rem;
+    background: rgba(218, 123, 147, 0.05);
+    border-radius: 6px;
+}
+
+.changelog-date {
+    font-weight: 600;
+    color: var(--rose-neon);
+    white-space: nowrap;
+    font-size: 0.9rem;
+}
+
+.changelog-description {
+    color: #cfcfcf;
+}
+
 /* ------------------------------
    FOOTER
 --------------------------------*/
