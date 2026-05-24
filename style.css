@@ -273,6 +273,185 @@ img {
 }
 
 /* ------------------------------
+   MODAL / POPUP
+--------------------------------*/
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    position: relative;
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 0 30px rgba(255, 122, 191, 0.3);
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    color: var(--rose-neon);
+    cursor: pointer;
+    z-index: 2001;
+    transition: 0.2s ease;
+}
+
+.modal-close:hover {
+    color: var(--emerald-green);
+    text-shadow: 0 0 8px var(--green-glow);
+}
+
+.modal-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--panel-border);
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.modal-body h2 {
+    color: var(--rose-neon);
+    text-shadow: 0 0 8px var(--rose-glow);
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+.modal-body p {
+    color: #d0d0d0;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.tech-stack {
+    margin-bottom: 1.5rem;
+}
+
+.tech-stack h3 {
+    color: var(--rose-neon);
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+}
+
+.tech-boxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+}
+
+.tech-box {
+    background: var(--green-glow);
+    color: var(--emerald-green);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    border: 1px solid var(--emerald-green);
+    box-shadow: 0 0 8px rgba(61, 252, 137, 0.3);
+}
+
+.repo-button {
+    display: block;
+    background: var(--rose-neon);
+    color: #111;
+    padding: 0.7rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 0 12px var(--rose-glow);
+    transition: 0.3s ease;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+    text-align: center;
+    width: 100%;
+}
+
+.repo-button:hover {
+    background: var(--emerald-green);
+    box-shadow: 0 0 16px var(--green-glow);
+    transform: translateY(-2px);
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    width: 100%;
+}
+
+.publication-button {
+    width: 100%;
+}
+
+.publication-button.disabled {
+    background: #555;
+    color: #999;
+    box-shadow: none;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.publication-button.disabled:hover {
+    background: #555;
+    box-shadow: none;
+    transform: none;
+}
+
+/* Make cards clickable */
+.featured-link {
+    cursor: pointer;
+    display: block;
+}
+
+.project-card-btn {
+    cursor: pointer;
+}
+
+.project-card-btn:focus {
+    outline: 2px solid var(--rose-neon);
+}
+
+/* Prevent default link behavior */
+a.featured-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ------------------------------
    RESPONSIVE TWEAKS
 --------------------------------*/
 @media (max-width: 768px) {
