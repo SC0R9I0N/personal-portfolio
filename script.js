@@ -1,23 +1,24 @@
 // Project Modal Functionality
-const modal = document.getElementById('projectModal');
-const modalClose = document.querySelector('.modal-close');
-const projectCards = document.querySelectorAll('.project-card-btn');
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('projectModal');
+    const modalClose = document.querySelector('.modal-close');
+    const projectCards = document.querySelectorAll('.project-card-btn');
 
-// Open modal when project card is clicked
-projectCards.forEach(card => {
-    card.addEventListener('click', (e) => {
-        e.preventDefault();
-        openModal(card);
-    });
-
-    // Support keyboard navigation
-    card.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
+    // Open modal when project card is clicked
+    projectCards.forEach(card => {
+        card.addEventListener('click', (e) => {
             e.preventDefault();
             openModal(card);
-        }
+        });
+
+        // Support keyboard navigation
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openModal(card);
+            }
+        });
     });
-});
 
 function openModal(card) {
     const title = card.dataset.projectTitle;
@@ -94,8 +95,9 @@ modal.addEventListener('click', (e) => {
 });
 
 // Close modal with Escape key
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.style.display === 'flex') {
-        closeModal();
-    }
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.style.display === 'flex') {
+            closeModal();
+        }
+    });
 });
