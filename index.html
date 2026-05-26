@@ -28,9 +28,48 @@
 
     <!-- HERO SECTION -->
     <header class="hero">
-        <div class="hero-content">
-            <img src="garrett.jpg" alt="Garrett Reihner" class="hero-photo">
-            <h1 class="hero-title">Hey, I'm Garrett Reihner. I have lots of ideas, but not enough time to...</h1>
+        <div class="hero-container">
+            <div class="hero-content">
+                <img src="garrett.jpg" alt="Garrett Reihner" class="hero-photo">
+                <h1 class="hero-title">Hey, I'm Garrett Reihner. I have lots of ideas, but not enough time to...</h1>
+            </div>
+            
+            <div class="flagship-card">
+                <div class="flagship-shine"></div>
+                <div class="flagship-badge">Flagship Project</div>
+                <div class="flagship-inner">
+                    <img src="greek_logo.jpg" alt="g(r)eek" class="flagship-image">
+                    <h2 class="flagship-title">g(r)eek</h2>
+                    <p class="flagship-subtitle">A Collection of Ambitious Personal Projects</p>
+                    <p class="flagship-description">Spanning systems programming, developer tooling, and game development. Three passion projects pushing technical boundaries: a custom operating system, a next-gen terminal emulator, and a magic-focused roguelite dungeon crawler.</p>
+                    <div class="flagship-projects">
+                        <button class="flagship-sub-btn project-card-btn" role="button" tabindex="0"
+                                data-project-title="Athena"
+                                data-project-image="athena.png"
+                                data-project-description="A planned personal Operating System project with a fully functional UI. Built from the ground up as a solo venture to deepen knowledge and skills in OS development, including kernel architecture, memory management, and system design."
+                                data-project-techs="C,Assembly,Kernel Development,UEFI,Memory Management,File Systems"
+                                data-project-repo="https://github.com/SC0R9I0N/Athena">
+                            View Athena
+                        </button>
+                        <button class="flagship-sub-btn project-card-btn" role="button" tabindex="0"
+                                data-project-title="Ares"
+                                data-project-image="ares.png"
+                                data-project-description="A planned GPU-accelerated terminal emulator designed to revolutionize command-line productivity. Features custom themes, IDE-style file system navigation, seamless WSL distro switching, built-in WSL and Homebrew support, auto-installed PowerShell, integrated monitoring tools for GitHub Copilot and Claude, and a split-window agent launcher for your current directory."
+                                data-project-techs="Rust,Tauri,WSL,PowerShell,GitHub Copilot,Claude API,GPU Acceleration,Terminal Emulation"
+                                data-project-repo="https://github.com/SC0R9I0N/Ares">
+                            View Ares
+                        </button>
+                        <button class="flagship-sub-btn project-card-btn" role="button" tabindex="0"
+                                data-project-title="Gaia"
+                                data-project-image="gaia.png"
+                                data-project-description="A magic-based roguelite dungeon crawler built from scratch without a game engine. Inspired by modern dungeon crawlers like Enter the Gungeon, it features roguelite mechanics with elevated progression systems. Stands out with an enhanced focus on magic casting rather than traditional melee and ranged weapons, creating a unique spellcasting experience with dynamic spell combinations and magical progression."
+                                data-project-techs="C++,Game Development,Graphics Programming,Physics Simulation,Procedural Generation,Game Design"
+                                data-project-repo="https://github.com/SC0R9I0N/Gaia">
+                            View Gaia
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -187,6 +226,7 @@
             <a href="work.html" class="card travel-card">Africa</a>
             <a href="work.html" class="card travel-card">Central & South America</a>
             <a href="work.html" class="card travel-card">Asia & Australia</a>
+            <a href="work.html" class="card travel-card">Antarctica</a>
         </div>
     </section>
 
@@ -196,6 +236,10 @@
 
         <div class="changelog-scroll-container">
             <div class="changelog">
+                <div class="changelog-entry">
+                    <div class="changelog-date">2026-05-25</div>
+                    <div class="changelog-description">Added Flagship Project</div>
+                </div>
                 <div class="changelog-entry">
                     <div class="changelog-date">2026-05-24</div>
                     <div class="changelog-description">Added a Card Popup for Projects</div>

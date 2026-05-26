@@ -58,6 +58,241 @@ img {
     text-shadow: 0 0 6px var(--green-glow);
 }
 
+.hero-photo {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--rose-neon);
+    box-shadow: 0 0 14px var(--rose-glow);
+    flex-shrink: 0;
+}
+
+.hero-title {
+    position: relative;
+    text-align: left;
+    font-size: 1.9rem;
+    max-width: 100%;
+    line-height: 1.4;
+}
+
+.hero-title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background: var(--rose-neon);
+    box-shadow: 0 0 8px var(--rose-glow);
+    border-radius: 2px;
+}
+
+/* Flagship Card */
+.flagship-card {
+    position: relative;
+    background: linear-gradient(135deg, rgba(217, 166, 99, 0.15), rgba(217, 166, 99, 0.08));
+    border: 2px solid #D9A663;
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 
+        0 0 20px rgba(217, 166, 99, 0.3),
+        inset 0 0 30px rgba(217, 166, 99, 0.1);
+    overflow: hidden;
+    transition: 0.3s ease;
+}
+
+.flagship-card:hover {
+    border-color: #C0C0C0;
+    box-shadow: 
+        0 0 30px rgba(192, 192, 192, 0.4),
+        inset 0 0 40px rgba(192, 192, 192, 0.15);
+    transform: translateY(-8px);
+}
+
+.flagship-card:hover .flagship-title,
+.flagship-card:hover .flagship-subtitle {
+    color: #C0C0C0;
+    text-shadow: 0 0 10px rgba(192, 192, 192, 0.4);
+}
+
+.flagship-card:hover .flagship-badge {
+    background: #C0C0C0;
+    box-shadow: 0 0 12px rgba(192, 192, 192, 0.5);
+}
+
+.flagship-shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: shimmer 3s infinite;
+    pointer-events: none;
+    border-radius: 16px;
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+    50% {
+        left: 100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+.flagship-badge {
+    display: inline-block;
+    background: #D9A663;
+    color: #111;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 12px rgba(217, 166, 99, 0.4);
+}
+
+.flagship-inner {
+    position: relative;
+    z-index: 1;
+}
+
+.flagship-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    border: 2px solid var(--panel-border);
+}
+
+.flagship-title {
+    font-size: 2rem;
+    color: #D9A663;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 10px rgba(217, 166, 99, 0.3);
+}
+
+.flagship-subtitle {
+    font-size: 1rem;
+    color: #D9A663;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 6px rgba(217, 166, 99, 0.2);
+}
+
+.flagship-description {
+    color: #d0d0d0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.flagship-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-bottom: 1.5rem;
+}
+
+.tech-pill {
+    background: rgba(61, 252, 137, 0.15);
+    color: var(--emerald-green);
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    border: 1px solid rgba(61, 252, 137, 0.3);
+    box-shadow: 0 0 6px rgba(61, 252, 137, 0.2);
+}
+
+.flagship-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--rose-neon), #ff6eb4);
+    color: #111;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 0 16px var(--rose-glow);
+    transition: 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.flagship-btn:hover {
+    background: linear-gradient(135deg, var(--emerald-green), #2efc7a);
+    box-shadow: 0 0 20px var(--green-glow);
+    transform: translateY(-2px);
+}
+
+.flagship-projects {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.flagship-sub-btn {
+    background: linear-gradient(135deg, rgba(218, 123, 147, 0.8), rgba(255, 122, 191, 0.8));
+    color: #fff;
+    padding: 0.7rem 1.2rem;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0 0 12px rgba(218, 123, 147, 0.4);
+    transition: 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.flagship-sub-btn:hover {
+    background: linear-gradient(135deg, #D9A663, #E5B974);
+    box-shadow: 0 0 16px rgba(217, 166, 99, 0.5);
+    transform: translateY(-2px);
+}
+
+/* Athena button - blue color */
+.flagship-sub-btn[data-project-title="Athena"] {
+    background: linear-gradient(135deg, #177EEE, #1E8FFF);
+    box-shadow: 0 0 12px rgba(23, 126, 238, 0.4);
+}
+
+.flagship-sub-btn[data-project-title="Athena"]:hover {
+    background: linear-gradient(135deg, #D9A663, #E5B974);
+    box-shadow: 0 0 16px rgba(217, 166, 99, 0.5);
+}
+
+/* Ares button - coral/salmon color */
+.flagship-sub-btn[data-project-title="Ares"] {
+    background: linear-gradient(135deg, #E56A6B, #F07C7D);
+    box-shadow: 0 0 12px rgba(229, 106, 107, 0.4);
+}
+
+.flagship-sub-btn[data-project-title="Ares"]:hover {
+    background: linear-gradient(135deg, #D9A663, #E5B974);
+    box-shadow: 0 0 16px rgba(217, 166, 99, 0.5);
+}
+
+/* Gaia button - green color */
+.flagship-sub-btn[data-project-title="Gaia"] {
+    background: linear-gradient(135deg, #6AB879, #7CC98B);
+    box-shadow: 0 0 12px rgba(106, 184, 121, 0.4);
+}
+
+.flagship-sub-btn[data-project-title="Gaia"]:hover {
+    background: linear-gradient(135deg, #D9A663, #E5B974);
+    box-shadow: 0 0 16px rgba(217, 166, 99, 0.5);
+}
+
 .nav-center {
     list-style: none;
     display: flex;
@@ -116,37 +351,22 @@ img {
 --------------------------------*/
 .hero {
     padding: 4rem 2rem;
-    text-align: center;
 }
 
-.hero-photo {
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin: 0 auto 1.5rem;
-
-    border: 3px solid var(--rose-neon);
-    box-shadow: 0 0 14px var(--rose-glow);
-}
-
-.hero-title {
-    position: relative;
-    text-align: left;
-    max-width: 700px;
+.hero-container {
+    display: grid;
+    grid-template-columns: 1.1fr 1.2fr;
+    gap: 3rem;
+    align-items: center;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
-.hero-title::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    width: 60%;
-    height: 3px;
-    background: var(--rose-neon);
-    box-shadow: 0 0 8px var(--rose-glow);
-    border-radius: 2px;
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
 }
 
 
@@ -179,6 +399,8 @@ img {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 2rem;
+    max-width: 1600px;
+    margin: 0 auto;
 }
 
 .featured-card {
@@ -221,6 +443,8 @@ img {
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     padding: 1rem 0;
+    max-width: 1600px;
+    margin: 0 auto;
 }
 
 .card {
@@ -527,6 +751,30 @@ a.featured-link {
 /* ------------------------------
    RESPONSIVE TWEAKS
 --------------------------------*/
+@media (max-width: 1300px) {
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .hero-content {
+        align-items: center;
+    }
+
+    .hero-title {
+        text-align: center;
+    }
+
+    .hero-title::after {
+        width: 100%;
+        left: 0;
+    }
+}
+
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
@@ -540,11 +788,32 @@ a.featured-link {
     .hero-title {
         font-size: 1.4rem;
     }
-}
 
-@media (max-width: 900px) {
-    .card-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .hero-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .hero-content {
+        align-items: center;
+    }
+
+    .hero-photo {
+        width: 200px;
+        height: 200px;
+    }
+
+    .hero-title {
+        text-align: center;
+    }
+
+    .hero-title::after {
+        width: 100%;
+        left: 0;
+    }
+
+    .flagship-card {
+        padding: 1.5rem;
     }
 }
 
