@@ -815,15 +815,7 @@ a.featured-link {
     .flagship-card {
         padding: 1.5rem;
     }
-}
 
-@media (max-width: 600px) {
-    .card-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 768px) {
     .changelog-scroll-container {
         height: 300px;
         padding: 1rem;
