@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Africa — Travel · Garrett Reihner</title>
+    <meta name="description" content="Photo gallery from Africa — travel photography by Garrett Reihner.">
+    <meta name="theme-color" content="#08090c">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="travel.css">
+</head>
+
+<body data-tint="251, 146, 60|74, 222, 128|251, 191, 36">
+
+<a class="skip-link" href="#gallery-main">Skip to gallery</a>
+
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+<div class="bg-grid" aria-hidden="true"></div>
+<div class="bg-grain" aria-hidden="true"></div>
+
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+<div class="scroll-progress" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<nav class="navbar" id="navbar">
+    <a href="../index.html" class="logo" data-magnetic aria-label="Garrett Reihner — home">
+        <span class="logo-mark">GR</span>
+        <span class="logo-text">GARRETT</span>
+    </a>
+
+    <div class="nav-right">
+        <a href="../index.html#travel" class="btn btn-ghost btn-sm" data-magnetic>All regions</a>
+        <a href="https://github.com/SC0R9I0N" target="_blank" rel="noopener" class="icon-btn" aria-label="GitHub" data-magnetic>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.53-1.35-1.29-1.71-1.29-1.71-1.06-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.04 1.79 2.74 1.27 3.4.97.11-.76.41-1.28.74-1.57-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.3-.52-1.47.11-3.07 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.6.24 2.77.12 3.07.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.27 5.69.42.36.8 1.08.8 2.19v3.25c0 .31.2.67.8.55A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
+        </a>
+    </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="gallery-hero">
+    <span class="wash art--africa" aria-hidden="true"></span>
+    <div class="shell">
+        <a href="../index.html#travel" class="back-link" data-reveal="fade">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+            Travel
+        </a>
+
+        <span class="eyebrow" data-reveal="fade">Region 03 — Gallery</span>
+        <h1 class="gallery-title" data-reveal>Africa</h1>
+        <p class="gallery-blurb" data-reveal style="--d:120ms">Wide horizons, wildlife that ignores you completely, and night skies with more stars than I knew were visible.</p>
+
+        <div class="gallery-meta" data-reveal style="--d:220ms">
+            <span class="meta-pill">Region <b>03</b> of <b>06</b></span>
+            <span class="meta-pill"><b id="photo-count">0</b> photos</span>
+        </div>
+    </div>
+</header>
+
+<!-- ============ REGION SWITCHER ============ -->
+<div class="shell">
+    <nav class="region-strip" id="region-strip" data-current="africa" aria-label="Travel regions"></nav>
+    <hr class="divider">
+</div>
+
+<!-- ============ GALLERY ============ -->
+<main class="gallery-section" id="gallery-main">
+    <div class="shell">
+
+        <!--
+          ADDING PHOTOS
+          -------------
+          1. Drop the image files into  travel/photos/africa/
+          2. Copy the block below for each photo, inside <div class="gallery"> :
+
+             <figure class="shot"
+                     data-full="photos/africa/full/example.jpg"
+                     data-place="City, Country"
+                     data-year="2025">
+                 <img src="photos/africa/example.jpg" alt="Short description of the photo" loading="lazy">
+                 <figcaption>
+                     <span class="shot-place">City, Country</span>
+                     <span class="shot-year">2025</span>
+                 </figcaption>
+             </figure>
+
+          data-full is optional — if you leave it off, the lightbox uses the
+          same file as the thumbnail. The grid, reveal animation, photo count
+          and lightbox all pick up new entries automatically.
+        -->
+        <div class="gallery" id="gallery" data-region="africa">
+        </div>
+
+        <div class="gallery-empty glass" id="gallery-empty">
+            <span class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="5" width="18" height="14" rx="2"/>
+                    <circle cx="8.5" cy="10" r="1.5"/>
+                    <path d="m21 15-5-5L5 19"/>
+                </svg>
+            </span>
+            <h2>Gallery coming soon</h2>
+            <p>Photos from Africa are still being sorted through. Check back shortly — or take a look at the other regions in the meantime.</p>
+            <a href="../index.html#travel" class="btn btn-ghost btn-sm" data-magnetic>Browse other regions</a>
+        </div>
+    </div>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+    <div class="shell">
+        <div class="footer-top">
+            <p class="footer-lead" data-reveal>Wide horizons and <span class="grad">the best skies I've stood under.</span></p>
+            <div class="footer-links" data-reveal style="--d:120ms">
+                <a href="../index.html" class="btn btn-ghost btn-sm" data-magnetic>Home</a>
+                <a href="../index.html#travel" class="btn btn-ghost btn-sm" data-magnetic>All regions</a>
+                <a href="https://linkedin.com/in/garrett-reihner" target="_blank" rel="noopener" class="btn btn-ghost btn-sm" data-magnetic>LinkedIn</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© <span id="year">2026</span> Garrett Reihner — built from scratch, no framework.</span>
+            <a href="#" class="back-top">
+                Back to top
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+            </a>
+        </div>
+    </div>
+</footer>
+
+<!-- ============ LIGHTBOX ============ -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" aria-hidden="true">
+    <button class="lb-close" aria-label="Close viewer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+
+    <div class="lightbox-stage">
+        <button class="lb-btn lb-prev" aria-label="Previous photo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="lb-btn lb-next" aria-label="Next photo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+
+        <img id="lb-image" src="" alt="">
+
+        <div class="lightbox-bar">
+            <p class="lightbox-caption">
+                <span id="lb-place"></span>
+                <span id="lb-year"></span>
+            </p>
+            <span class="lightbox-count" id="lb-count"></span>
+        </div>
+    </div>
+</div>
+
+<script src="travel.js"></script>
+</body>
+</html>

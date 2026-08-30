@@ -3,302 +3,1097 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Garrett Reihner • Portfolio</title>
+    <title>Garrett Reihner — Software Engineer</title>
+    <meta name="description" content="Garrett Reihner — software engineer building operating systems, developer tooling, and games. Systems programming in C, Rust, and C++.">
+    <meta name="theme-color" content="#08090c">
+
+    <meta property="og:title" content="Garrett Reihner — Software Engineer">
+    <meta property="og:description" content="Systems programming, developer tooling, and game development.">
+    <meta property="og:type" content="website">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+
+    <!-- Arm the boot intro before first paint. Runs on every load; skipped only
+         for reduced-motion users, and never shown at all without JS so nobody
+         can be trapped behind it. -->
+    <script>
+        if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            document.documentElement.className += " intro";
+        }
+    </script>
 </head>
 
 <body>
 
-    <!-- NAVBAR -->
-    <nav class="navbar">
-        <div class="nav-left">
-            <div class="logo">GR</div>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ============ BOOT INTRO ============ -->
+<div class="preloader" id="preloader">
+    <canvas id="preloader-canvas" aria-hidden="true"></canvas>
+    <div class="pre-scrim" aria-hidden="true"></div>
+
+    <div class="pre-inner">
+        <div class="pre-mark">
+            <span class="logo-mark">GR</span>
+            garrett reihner
         </div>
 
-        <ul class="nav-center">
-            <li><a href="#projects" class="nav-link">Projects</a></li>
-            <li><a href="#extras" class="nav-link">Extras</a></li>
-            <li><a href="#travel" class="nav-link">Travel</a></li>
-        </ul>
+        <div class="pre-log" id="pre-log" role="status" aria-live="polite"></div>
 
-        <div class="nav-right">
-            <a href="#contact" class="contact-btn">Contact Me</a>
+        <div class="pre-bar"><span id="pre-bar-fill"></span></div>
+        <div class="pre-meta">
+            <span id="pre-pct">0%</span>
+            <span id="pre-status">booting</span>
         </div>
-    </nav>
 
-    <!-- HERO SECTION -->
-    <header class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <img src="main_gallery/garrett.jpg" alt="Garrett Reihner" class="hero-photo">
-                <h1 class="hero-title">Hey, I'm Garrett Reihner. I have lots of ideas, but not enough time to...</h1>
+        <button class="pre-enter" id="pre-enter" type="button" data-magnetic>
+            Start Site
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <span class="pre-hint">press enter</span>
+    </div>
+</div>
+<div class="pre-flash" id="pre-flash" aria-hidden="true"></div>
+
+<!-- ============ AMBIENT LAYERS ============ -->
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+<div class="bg-grid" aria-hidden="true"></div>
+<div class="bg-grain" aria-hidden="true"></div>
+<canvas id="ripple-canvas" aria-hidden="true"></canvas>
+
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+
+<div class="scroll-progress" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<nav class="navbar" id="navbar">
+    <a href="#top" class="logo" data-magnetic aria-label="Garrett Reihner — home">
+        <span class="logo-mark">GR</span>
+        <span class="logo-text">GARRETT</span>
+    </a>
+
+    <ul class="nav-center" id="nav-center">
+        <span class="nav-indicator" aria-hidden="true"></span>
+        <li><a href="#featured"  class="nav-link">Work</a></li>
+        <li><a href="#projects"  class="nav-link">Projects</a></li>
+        <li><a href="#extras"    class="nav-link">Extras</a></li>
+        <li><a href="#travel"    class="nav-link">Travel</a></li>
+        <li><a href="#changelog" class="nav-link">Changelog</a></li>
+    </ul>
+
+    <div class="nav-right">
+        <a href="https://github.com/SC0R9I0N" target="_blank" rel="noopener" class="icon-btn desktop-only" aria-label="GitHub" data-magnetic>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.53-1.35-1.29-1.71-1.29-1.71-1.06-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.04 1.79 2.74 1.27 3.4.97.11-.76.41-1.28.74-1.57-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.3-.52-1.47.11-3.07 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.6.24 2.77.12 3.07.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.27 5.69.42.36.8 1.08.8 2.19v3.25c0 .31.2.67.8.55A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
+        </a>
+        <a href="https://linkedin.com/in/garrett-reihner" target="_blank" rel="noopener" class="icon-btn desktop-only" aria-label="LinkedIn" data-magnetic>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05a3.75 3.75 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+        </a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- ============ MOBILE MENU ============ -->
+<div class="mobile-menu" id="mobile-menu">
+    <a href="#featured"  style="--i:0"><span>01</span> Work</a>
+    <a href="#projects"  style="--i:1"><span>02</span> Projects</a>
+    <a href="#extras"    style="--i:2"><span>03</span> Extras</a>
+    <a href="#travel"    style="--i:3"><span>04</span> Travel</a>
+    <a href="#changelog" style="--i:4"><span>05</span> Changelog</a>
+
+    <div class="mobile-social" style="--i:5">
+        <a href="https://github.com/SC0R9I0N" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">GitHub</a>
+        <a href="https://linkedin.com/in/garrett-reihner" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">LinkedIn</a>
+        <a href="https://www.boot.dev/u/sc0r9i0n" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Boot.dev</a>
+    </div>
+</div>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+    <div class="shell hero-grid">
+
+        <div class="hero-left">
+            <div class="hero-status" data-reveal="fade">
+                <span class="status-dot"></span>
+                Open to new projects and ideas
             </div>
-            
-            <div class="flagship-card">
-                <div class="flagship-shine"></div>
-                <div class="flagship-badge">Flagship Project</div>
-                <div class="flagship-inner">
-                    <img src="main_gallery/greek_logo.jpg" alt="g(r)eek" class="flagship-image">
-                    <h2 class="flagship-title">g(r)eek</h2>
-                    <p class="flagship-subtitle">A Collection of Ambitious Personal Projects</p>
-                    <p class="flagship-description">Spanning systems programming, developer tooling, and game development. Three passion projects pushing technical boundaries: a custom operating system, a next-gen terminal emulator, and a magic-focused roguelite dungeon crawler.</p>
-                    <div class="flagship-projects">
-                        <button class="flagship-sub-btn project-card-btn" role="button" tabindex="0"
-                                data-project-title="Athena"
-                                data-project-image="main_gallery/athena.png"
-                                data-project-description="A planned personal Operating System project with a fully functional UI. Built from the ground up as a solo venture to deepen knowledge and skills in OS development, including kernel architecture, memory management, and system design."
-                                data-project-techs="C,Assembly,Kernel Development,UEFI,Memory Management,File Systems"
-                                data-project-repo="https://github.com/SC0R9I0N/Athena">
-                            View Athena
-                        </button>
-                        <button class="flagship-sub-btn project-card-btn" role="button" tabindex="0"
-                                data-project-title="Ares"
-                                data-project-image="main_gallery/ares.png"
-                                data-project-description="A planned GPU-accelerated terminal emulator designed to revolutionize command-line productivity. Features custom themes, IDE-style file system navigation, seamless WSL distro switching, built-in WSL and Homebrew support, auto-installed PowerShell, integrated monitoring tools for GitHub Copilot and Claude, and a split-window agent launcher for your current directory."
-                                data-project-techs="Rust,Tauri,WSL,PowerShell,GitHub Copilot,Claude API,GPU Acceleration,Terminal Emulation"
-                                data-project-repo="https://github.com/SC0R9I0N/Ares">
-                            View Ares
-                        </button>
-                        <button class="flagship-sub-btn project-card-btn" role="button" tabindex="0"
-                                data-project-title="Gaia"
-                                data-project-image="main_gallery/gaia.png"
-                                data-project-description="A magic-based roguelite dungeon crawler built from scratch without a game engine. Inspired by modern dungeon crawlers like Enter the Gungeon, it features roguelite mechanics with elevated progression systems. Stands out with an enhanced focus on magic casting rather than traditional melee and ranged weapons, creating a unique spellcasting experience with dynamic spell combinations and magical progression."
-                                data-project-techs="C++,Game Development,Graphics Programming,Physics Simulation,Procedural Generation,Game Design"
-                                data-project-repo="https://github.com/SC0R9I0N/Gaia">
-                            View Gaia
-                        </button>
-                    </div>
+
+            <h1 class="hero-title" data-split>
+                I build the layers
+                <em class="grad">most people never see.</em>
+            </h1>
+
+            <p class="hero-roles" data-reveal="fade" style="--d:400ms">
+                <span class="caret">&gt;</span>
+                <span id="role-text" data-roles="Systems Programmer|Tooling Engineer|Game Developer|OS Tinkerer"></span>
+            </p>
+
+            <p class="hero-bio" data-reveal="fade" style="--d:520ms">
+                I'm <strong>Garrett Reihner</strong> — a software engineer drawn to the hard, unglamorous parts
+                of the stack: kernels, terminals, renderers, and the tooling that makes everything else possible.
+                Lots of ideas, never enough hours.
+            </p>
+
+            <div class="hero-cta" data-reveal="fade" style="--d:640ms">
+                <a href="#featured" class="btn btn-primary" data-magnetic>
+                    View selected work
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+                </a>
+                <a href="https://github.com/SC0R9I0N" target="_blank" rel="noopener" class="btn btn-ghost" data-magnetic>
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.53-1.35-1.29-1.71-1.29-1.71-1.06-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.04 1.79 2.74 1.27 3.4.97.11-.76.41-1.28.74-1.57-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.3-.52-1.47.11-3.07 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.6.24 2.77.12 3.07.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.27 5.69.42.36.8 1.08.8 2.19v3.25c0 .31.2.67.8.55A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
+                    GitHub
+                </a>
+            </div>
+
+            <div class="hero-stats" data-reveal="fade" style="--d:760ms">
+                <div>
+                    <!-- counted from the cards on this page, so it can never drift -->
+                    <div class="stat-value" data-count="0" data-count-selector="[data-project]">0</div>
+                    <div class="stat-label">Projects</div>
                 </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- FEATURED WORK / ABOUT ME -->
-    <section id="featured" class="section">
-        <h2 class="section-title">Featured Work</h2>
-
-        <div class="featured-grid">
-            <div class="featured-link project-card-btn" role="button" tabindex="0"
-                 data-project-title="ClassBits"
-                 data-project-image="main_gallery/classbits.png"
-                 data-project-description="A QR-based Class Manager for efficiently tracking attendance using QR codes. Streamline your classroom management with real-time attendance tracking and easy-to-use interface."
-                 data-project-techs="React,Node.js,QR Code,Database"
-                 data-project-repo="https://github.com/SC0R9I0N/qr-class-manager">
-                <div class="featured-card">
-                    <img src="main_gallery/classbits.png" class="featured-img">
-                    <div class="featured-info">
-                        <h3>ClassBits</h3>
-                        <p>A QR-based Class Manager</p>
-                    </div>
+                <div>
+                    <div class="stat-value" data-count="8" data-suffix="">0</div>
+                    <div class="stat-label">Languages used</div>
                 </div>
-            </div>
-
-            <div class="featured-link project-card-btn" role="button" tabindex="0"
-                 data-project-title="AVENDRA"
-                 data-project-image="main_gallery/avendra.png"
-                 data-project-description="An upcoming publication on automated drones. Explore the cutting-edge research and development in autonomous drone technology, covering everything from hardware design to advanced software algorithms."
-                 data-project-techs="Python,Robotics,Computer Vision,Autonomous Systems"
-                 data-project-repo="https://github.com/SC0R9I0N/AVENDRA-source-code"
-                 data-project-is-publication="true"
-                 data-project-published="false">
-                <div class="featured-card">
-                    <img src="main_gallery/avendra.png" class="featured-img">
-                    <div class="featured-info">
-                        <h3>AVENDRA</h3>
-                        <p>An upcoming publication on automated drones</p>
-                    </div>
+                <div>
+                    <div class="stat-value" data-count="5" data-suffix="">0</div>
+                    <div class="stat-label">Continents visited</div>
                 </div>
-            </div>
-
-            <div class="featured-link project-card-btn" role="button" tabindex="0"
-                 data-project-title="PairPad"
-                 data-project-image="main_gallery/pairpad.png"
-                 data-project-description="A WIP Collaborative Code Editor enabling real-time pair programming with multiple developers. Share code, see live edits, and collaborate seamlessly on coding projects."
-                 data-project-techs="WebSockets,JavaScript,React,Real-time Sync"
-                 data-project-repo="https://github.com/SC0R9I0N/PairPad">
-                <div class="featured-card">
-                    <img src="main_gallery/pairpad.png" class="featured-img">
-                    <div class="featured-info">
-                        <h3>PairPad</h3>
-                        <p>A WIP Collaborative Code Editor</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section id="projects" class="section">
-        <h2 class="section-title">Projects</h2>
-
-        <div class="card-grid">
-            <div class="card project-card-btn" role="button" tabindex="0"
-                 data-project-title="StegoForge"
-                 data-project-image="main_gallery/rust.png"
-                 data-project-description="WIP Steganography Tool for encoding and decoding hidden messages within files. Built with advanced cryptographic techniques for secure data hiding."
-                 data-project-techs="Rust,Cryptography,File I/O,Algorithms"
-                 data-project-repo="https://github.com/SC0R9I0N/StegoForge">
-                <img src="main_gallery/rust.png" class="card-logo">
-                <h3>StegoForge</h3>
-                <p>WIP Steganography Tool</p>
-            </div>
-
-            <div class="card project-card-btn" role="button" tabindex="0"
-                 data-project-title="D&D Character Sheet"
-                 data-project-image="main_gallery/dnd-logo.png"
-                 data-project-description="WIP Character Sheet Creator for D&D campaigns. Easily create, manage, and track your characters with an intuitive interface."
-                 data-project-techs="React,Database,Game Logic,UI/UX"
-                 data-project-repo="https://github.com/SC0R9I0N/DND-character-creator">
-                <img src="main_gallery/dnd-logo.png" class="card-logo">
-                <h3>D&D Character Sheet</h3>
-                <p>WIP Character Sheet Creator</p>
-            </div>
-
-            <div class="card project-card-btn" role="button" tabindex="0"
-                 data-project-title="Rust Ray Tracing"
-                 data-project-image="main_gallery/rust.png"
-                 data-project-description="WIP Ray Tracing Simulator written in Rust. Explore the fundamentals of ray tracing and rendering with high-performance Rust code."
-                 data-project-techs="Rust,Graphics,Ray Tracing,Performance"
-                 data-project-repo="https://github.com/SC0R9I0N/ray-tracing-rust">
-                <img src="main_gallery/rust.png" class="card-logo">
-                <h3>Rust Ray Tracing</h3>
-                <p>WIP Ray Tracing Simulator</p>
             </div>
         </div>
 
-        <div class="card-grid">
-            <div class="card project-card-btn" role="button" tabindex="0"
-                 data-project-title="Brainf**k IDE"
-                 data-project-image="main_gallery/brainf.png"
-                 data-project-description="WIP Minimalist IDE for Brainf**k language. A lightweight editor with syntax highlighting and execution capabilities."
-                 data-project-techs="JavaScript,IDE,Interpreter,Brainf**k"
-                 data-project-repo="https://github.com/SC0R9I0N/Brainfuck-IDE">
-                <img src="main_gallery/brainf.png" class="card-logo">
-                <h3>Brainf**k IDE</h3>
-                <p>WIP Minimalist IDE for Brainf**k</p>
-            </div>
-
-            <div class="card project-card-btn" role="button" tabindex="0"
-                 data-project-title="Asteroid"
-                 data-project-image="main_gallery/rust.png"
-                 data-project-description="WIP Asteroid game built with Rust. A classic arcade-style game featuring physics-based gameplay and smooth graphics."
-                 data-project-techs="Rust,Game Dev,Graphics,Physics"
-                 data-project-repo="https://github.com/SC0R9I0N/asteroid-rust">
-                <img src="main_gallery/rust.png" class="card-logo">
-                <h3>Asteroid</h3>
-                <p>WIP Asteroid in Rust</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- EXTRAS -->
-    <section id="extras" class="section">
-        <h2 class="section-title">Extras</h2>
-
-        <div class="card-grid">
-            <a href="https://github.com/SC0R9I0N" class="card">
-                <img src="main_gallery/github.svg" class="card-logo">
-                <h3>GitHub</h3>
-                <p>My repositories</p>
-            </a>
-
-            <a href="https://www.chess.com/member/sc0r9i0n" class="card">
-                <img src="main_gallery/chess.png" class="card-logo">
-                <h3>Chess.com</h3>
-                <p>My profile</p>
-            </a>
-
-            <a href="https://www.boot.dev/u/sc0r9i0n" class="card">
-                <img src="main_gallery/bootdev.png" class="card-logo">
-                <h3>Boot.dev</h3>
-                <p>My Profile</p>
-            </a>
-        </div>
-    </section>
-
-    <!-- TRAVEL -->
-    <section id="travel" class="section">
-        <h2 class="section-title">Travel</h2>
-
-        <div class="card-grid">
-            <a href="work.html" class="card travel-card">Europe</a>
-            <a href="work.html" class="card travel-card">Middle East</a>
-            <a href="work.html" class="card travel-card">Africa</a>
-            <a href="work.html" class="card travel-card">Central & South America</a>
-            <a href="work.html" class="card travel-card">Asia & Australia</a>
-            <a href="work.html" class="card travel-card">Antarctica</a>
-        </div>
-    </section>
-
-    <!-- CHANGELOG -->
-    <section id="changelog" class="section">
-        <h2 class="section-title">Changelog</h2>
-
-        <div class="changelog-scroll-container">
-            <div class="changelog">
-                <div class="changelog-entry">
-                    <div class="changelog-date">ON ITS WAY</div>
-                    <div class="changelog-description">Form Submission Contact Function</div>
+        <!-- Flagship -->
+        <div class="hero-right" data-reveal="scale" style="--d:300ms">
+            <article class="flagship glass" data-tilt data-spotlight>
+                <div class="flagship-top">
+                    <span class="badge">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2 14.2 8.5 21 9.3l-5 4.4 1.4 6.8L12 17.2 6.6 20.5 8 13.7l-5-4.4 6.8-.8z"/></svg>
+                        Flagship
+                    </span>
+                    <span class="flagship-year">2025 — ongoing</span>
                 </div>
-                <div class="changelog-entry">
-                    <div class="changelog-date">2026-05-25</div>
-                    <div class="changelog-description">Added Flagship Project</div>
-                </div>
-                <div class="changelog-entry">
-                    <div class="changelog-date">2026-05-24</div>
-                    <div class="changelog-description">Added a Card Popup for Projects</div>
-                </div>
-                <div class="changelog-entry">
-                    <div class="changelog-date">2026-04-20</div>
-                    <div class="changelog-description">Updated Changelog for scrollable functionality</div>
-                </div>
-                <div class="changelog-entry">
-                    <div class="changelog-date">2026-04-20</div>
-                    <div class="changelog-description">Added changelog section to website</div>
-                </div>
-                <div class="changelog-entry">
-                    <div class="changelog-date">2026-04-16</div>
-                    <div class="changelog-description">Fix project card visualization</div>
-                </div>
-                <div class="changelog-entry">
-                    <div class="changelog-date">2026-04-14</div>
-                    <div class="changelog-description">Initial portfolio launch</div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- CONTACT -->
-    <footer id="contact" class="footer">
-        <h2>Contact Me</h2>
-        <p>LinkedIn: <a href="https://linkedin.com/in/garrett-reihner">Your Profile</a></p>
-    </footer>
+                <div class="flagship-head">
+                    <h2 class="flagship-title">g<span class="accent">(r)</span>eek</h2>
+                    <p class="flagship-sub">three_projects // one_pantheon</p>
+                </div>
 
-    <!-- PROJECT MODAL -->
-    <div id="projectModal" class="modal-backdrop" style="display: none;">
-        <div class="modal-content">
-            <button class="modal-close" aria-label="Close modal">&times;</button>
-            
-            <img id="modalImage" src="" alt="Project" class="modal-image">
-            
-            <div class="modal-body">
-                <h2 id="modalTitle"></h2>
-                <p id="modalDescription"></p>
-                
-                <div class="tech-stack">
-                    <h3>Technologies</h3>
-                    <div id="techBoxes" class="tech-boxes"></div>
+                <p class="flagship-desc">
+                    An umbrella for my most ambitious work — systems programming, developer tooling and game
+                    development, each built from first principles rather than a framework.
+                </p>
+
+                <dl class="spec spec-inline">
+                    <div><dt>Scope</dt><dd>3 projects</dd></div>
+                    <div><dt>Stack</dt><dd>C · Rust · C++</dd></div>
+                    <div><dt>Approach</dt><dd>No engines, no frameworks</dd></div>
+                </dl>
+
+                <div class="flagship-list">
+                    <button class="sub-project" type="button"
+                            data-project
+                            data-title="Athena"
+                            data-status="planned"
+                            data-role="Solo build"
+                            data-type="Operating system"
+                            data-stack="C · Assembly"
+                            data-focus="Kernel, memory, filesystems"
+                            data-desc="A personal operating system project with a fully functional UI. Built from the ground up as a solo venture to deepen knowledge of kernel architecture, memory management, and system design."
+                            data-techs="C,Assembly,Kernel Development,UEFI,Memory Management,File Systems"
+                            data-repo="https://github.com/SC0R9I0N/Athena">
+                        <span class="lang-mark" aria-hidden="true">C</span>
+                        <span>
+                            <span class="sub-name">Athena</span><br>
+                            <span class="sub-meta">operating system · C / ASM</span>
+                        </span>
+                        <span class="sub-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+                    </button>
+
+                    <button class="sub-project" type="button"
+                            data-project
+                            data-title="Ares"
+                            data-status="building"
+                            data-role="Solo build"
+                            data-type="Terminal emulator"
+                            data-stack="Rust · Tauri 2 · wgpu"
+                            data-focus="PTY sessions, VT parsing, WSL-first"
+                            data-desc="A GPU-accelerated terminal emulator for Windows, built as a four-crate Rust workspace behind a Tauri 2 shell. PTY sessions stream into a tabbed UI, a VT parser handles CSI/SGR/OSC with a 10k-line scrollback grid, a wgpu renderer builds a cached glyph atlas, and the shell launcher detects WSL distros with a PowerShell fallback. Adds a filesystem sidebar, hot-reloading TOML themes, and a split pane that launches Claude or Copilot against your current directory. 45 unit tests across the workspace."
+                            data-techs="Rust,Tauri 2,wgpu,WGSL,portable-pty,vte,WSL"
+                            data-repo="https://github.com/SC0R9I0N/Ares">
+                        <span class="lang-mark" aria-hidden="true">RS</span>
+                        <span>
+                            <span class="sub-name">Ares</span><br>
+                            <span class="sub-meta">terminal emulator · Rust / Tauri</span>
+                        </span>
+                        <span class="sub-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+                    </button>
+
+                    <button class="sub-project" type="button"
+                            data-project
+                            data-title="Gaia"
+                            data-status="building"
+                            data-role="Two-person build"
+                            data-type="Roguelite game"
+                            data-stack="C++20 · SDL2"
+                            data-focus="Biomes, spell combos, meta-progression"
+                            data-desc="A magic-based roguelite dungeon crawler on plain C++20 and SDL2 — no game engine. The hub-and-run loop is playable: run rooms roll a biome that themes the palette and lays a signature surface hazard (lava, poison, spikes, water, ice), dodge-roll i-frames turn those hazards into timing puzzles, and spells resolve as released combos. Hub vendors swap runes, characters and artifacts, each vessel has a 30-node skill tree, and meta-progression persists between sessions while death rolls back your gold."
+                            data-techs="C++20,SDL2,CMake,Procedural Generation,Game Design"
+                            data-repo="https://github.com/SC0R9I0N/Gaia">
+                        <span class="lang-mark" aria-hidden="true">C++</span>
+                        <span>
+                            <span class="sub-name">Gaia</span><br>
+                            <span class="sub-meta">roguelite · C++20 / SDL2</span>
+                        </span>
+                        <span class="sub-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+                    </button>
                 </div>
-                
-                <div class="button-container">
-                    <a id="modalRepoBtn" href="" target="_blank" class="repo-button">View Repository</a>
-                    <a id="modalPublicationBtn" href="" target="_blank" class="repo-button publication-button" style="display: none;">View Publication</a>
-                </div>
-            </div>
+            </article>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <div class="scroll-hint" aria-hidden="true">
+        <span class="rail"></span>
+        Scroll
+    </div>
+</header>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" data-marquee aria-hidden="true">
+    <div class="marquee-track">
+        <span>Rust</span><i></i><span>C++</span><i></i><span>C</span><i></i><span>TypeScript</span><i></i>
+        <span>Python</span><i></i><span>Bash</span><i></i><span>Assembly</span><i></i>
+        <span>Tauri</span><i></i><span>wgpu</span><i></i><span>SDL2</span><i></i><span>Win32 / GDI+</span><i></i>
+        <span>React</span><i></i><span>Next.js</span><i></i><span>Electron</span><i></i><span>Flask</span><i></i>
+        <span>AWS CDK</span><i></i><span>Lambda</span><i></i><span>DynamoDB</span><i></i>
+        <span>PyTorch</span><i></i><span>SQLite</span><i></i><span>Computer Architecture</span><i></i>
+        <span>Kernel Development</span><i></i><span>Procedural Generation</span><i></i>
+    </div>
+</div>
+
+<!-- ============ FEATURED WORK ============ -->
+<section id="featured" class="section">
+    <div class="shell">
+        <div class="section-head">
+            <div>
+                <span class="eyebrow" data-reveal="fade">01 — Selected</span>
+                <h2 class="section-title" data-reveal>Featured work</h2>
+            </div>
+            <p class="section-note" data-reveal style="--d:120ms">
+                Three projects I've put the most hours into. Click any card for the full breakdown.
+            </p>
+        </div>
+
+        <div class="featured-grid">
+            <article class="featured-card glass" data-reveal style="--d:0ms" data-spotlight
+                     data-project
+                     data-title="ClassBits"
+                     data-status="live"
+                     data-role="Team of 5"
+                     data-type="Serverless web app"
+                     data-stack="React · AWS CDK · Lambda"
+                     data-focus="Cognito auth, DynamoDB, CloudFront"
+                     data-desc="A QR-based class manager that replaces the roll-call with a two-second scan. Students scan a session code, attendance lands in DynamoDB, and instructors get a dashboard instead of a spreadsheet. The whole stack is serverless — API Gateway and Lambda for business logic, Cognito for auth, S3 and CloudFront for the React frontend — deployed from AWS CDK."
+                     data-techs="React,Vite,Python,AWS CDK,Lambda,DynamoDB,Cognito,API Gateway,S3,CloudFront"
+                     data-repo="https://github.com/SC0R9I0N/qr-class-manager"
+                     data-live="https://d12l6j7r4rtj92.cloudfront.net/"
+                     tabindex="0" role="button" aria-label="ClassBits — view details">
+                <div class="plate">
+                    <div class="plate-top">
+                        <span class="featured-index">01</span>
+                        <span class="status-chip live">Live</span>
+                    </div>
+                    <dl class="spec">
+                        <div><dt>Role</dt><dd>Team of 5</dd></div>
+                        <div><dt>Type</dt><dd>Serverless web app</dd></div>
+                        <div><dt>Stack</dt><dd>React · AWS CDK · Lambda</dd></div>
+                        <div><dt>Focus</dt><dd>Cognito auth, DynamoDB</dd></div>
+                    </dl>
+                </div>
+                <div class="featured-body">
+                    <h3>ClassBits</h3>
+                    <p>QR-based attendance on a fully serverless AWS stack — scan in, dashboard out.</p>
+                    <span class="card-cta">
+                        Case study
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+                    </span>
+                </div>
+            </article>
+
+            <article class="featured-card glass" data-reveal style="--d:110ms" data-spotlight
+                     data-project
+                     data-title="Skyblock Item Browser"
+                     data-status="shipped"
+                     data-role="Solo build"
+                     data-type="Desktop app"
+                     data-stack="TypeScript · React · Electron"
+                     data-focus="5,600+ items, live market prices"
+                     data-desc="A standalone desktop encyclopedia for every Hypixel Skyblock item, wrapped in a faithful Minecraft-style UI. Browse 5,600+ items in a virtualised inventory grid with colour-coded lore tooltips, inspect crafting recipes and sources, pull live auction-house and bazaar prices, compute level-100 pet stats, and plan builds against the real enchant, reforge and gemstone rules. Ships as one self-contained Windows installer and works fully offline."
+                     data-techs="TypeScript,React 19,Electron,Vite,Node.js,Coflnet API,Hypixel API"
+                     data-repo="https://github.com/SC0R9I0N/skyblockitems"
+                     tabindex="0" role="button" aria-label="Skyblock Item Browser — view details">
+                <div class="plate">
+                    <div class="plate-top">
+                        <span class="featured-index">02</span>
+                        <span class="status-chip shipped">Shipped</span>
+                    </div>
+                    <dl class="spec">
+                        <div><dt>Role</dt><dd>Solo build</dd></div>
+                        <div><dt>Type</dt><dd>Desktop app</dd></div>
+                        <div><dt>Stack</dt><dd>TypeScript · React · Electron</dd></div>
+                        <div><dt>Focus</dt><dd>5,600+ items, live prices</dd></div>
+                    </dl>
+                </div>
+                <div class="featured-body">
+                    <h3>Skyblock Item Browser</h3>
+                    <p>An offline desktop encyclopedia for 5,600+ Hypixel Skyblock items, with live market prices and a build planner.</p>
+                    <span class="card-cta">
+                        Case study
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+                    </span>
+                </div>
+            </article>
+
+            <article class="featured-card glass" data-reveal style="--d:220ms" data-spotlight
+                     data-project
+                     data-title="PairPad"
+                     data-status="building"
+                     data-role="Scrum Master · team of 4"
+                     data-type="Collaborative editor"
+                     data-stack="React · Vite · Flask"
+                     data-focus="Session management, test coverage"
+                     data-desc="A real-time collaborative coding and whiteboarding platform for pair programming and interactive learning — shared documents, live cursor positions, a synchronised whiteboard, and sandboxed Python execution. Built as a four-person Software Engineering final project: I ran the sprints as Scrum Master and did the primary work on the backend test suite and the documentation that kept the team aligned."
+                     data-techs="React,Vite,Python,Flask,SpacetimeDB,Vitest,pytest"
+                     data-repo="https://github.com/SC0R9I0N/PairPad"
+                     tabindex="0" role="button" aria-label="PairPad — view details">
+                <div class="plate">
+                    <div class="plate-top">
+                        <span class="featured-index">03</span>
+                        <span class="status-chip building">In progress</span>
+                    </div>
+                    <dl class="spec">
+                        <div><dt>Role</dt><dd>Scrum Master · team of 4</dd></div>
+                        <div><dt>Type</dt><dd>Collaborative editor</dd></div>
+                        <div><dt>Stack</dt><dd>React · Vite · Flask</dd></div>
+                        <div><dt>Focus</dt><dd>Session management, testing</dd></div>
+                    </dl>
+                </div>
+                <div class="featured-body">
+                    <h3>PairPad</h3>
+                    <p>A real-time collaborative editor and whiteboard, built with a team of four.</p>
+                    <span class="card-cta">
+                        Case study
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+                    </span>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section id="projects" class="section">
+    <div class="shell">
+        <div class="section-head">
+            <div>
+                <span class="eyebrow" data-reveal="fade">02 — Archive</span>
+                <h2 class="section-title" data-reveal>Everything else</h2>
+            </div>
+            <p class="section-note" data-reveal style="--d:120ms">
+                Desktop apps, coursework and experiments. Every card is labelled with how far along it actually is.
+            </p>
+        </div>
+
+        <div class="project-grid">
+            <article class="mini-card glass" data-reveal style="--d:0ms" data-spotlight
+                     data-project
+                     data-title="NeuroMesh"
+                     data-status="shipped"
+                     data-role="Solo build"
+                     data-type="Desktop app"
+                     data-stack="Rust · egui · SQLite"
+                     data-focus="Knowledge graph, offline NLP"
+                     data-desc="A fully offline native Rust desktop app that ingests notes, auto-categorises them with rule-based NLP, and lays them out as an interactive knowledge graph. A force-directed simulation positions the nodes and persists them to a local SQLite database — pan, zoom, drag nodes, and edit content in place. Nothing leaves the machine, and it installs per-user on Windows with no admin rights."
+                     data-techs="Rust,egui,eframe,SQLite,rusqlite,Inno Setup"
+                     data-repo="https://github.com/SC0R9I0N/neuromesh"
+                     tabindex="0" role="button" aria-label="NeuroMesh — view details">
+                <div class="mini-top">
+                    <span class="mini-index">01</span>
+                    <span class="chip-status shipped">Shipped</span>
+                </div>
+                <h3>NeuroMesh</h3>
+                <p>Offline note graph in Rust — ingest, auto-categorise, and explore as a force-directed map.</p>
+                <dl class="spec spec-mini">
+                    <div><dt>Type</dt><dd>Desktop app</dd></div>
+                    <div><dt>Stack</dt><dd>Rust · egui · SQLite</dd></div>
+                    <div><dt>Focus</dt><dd>Knowledge graph, offline NLP</dd></div>
+                </dl>
+                <span class="card-cta">
+                    Details
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+                </span>
+            </article>
+
+            <article class="mini-card glass" data-reveal style="--d:80ms" data-spotlight
+                     data-project
+                     data-title="WoW Collector"
+                     data-status="shipped"
+                     data-role="Solo build"
+                     data-type="Web + desktop app"
+                     data-stack="TypeScript · Next.js · Electron"
+                     data-focus="Blizzard OAuth, profile storage"
+                     data-desc="Tracks World of Warcraft mount and transmog collections for any character — enter a name, realm and region, with no Battle.net login or OAuth consent screen. All Blizzard API traffic runs server-side on client credentials so the id and secret never reach the browser. It ships both as a web app and as an Electron desktop build whose shell boots the compiled Next server on a free localhost port, which is why saved characters live in a profiles file rather than localStorage."
+                     data-techs="TypeScript,Next.js,React,Electron,Blizzard API,OAuth 2.0"
+                     data-repo="https://github.com/SC0R9I0N/wowcollector"
+                     tabindex="0" role="button" aria-label="WoW Collector — view details">
+                <div class="mini-top">
+                    <span class="mini-index">02</span>
+                    <span class="chip-status shipped">Shipped</span>
+                </div>
+                <h3>WoW Collector</h3>
+                <p>Mount and transmog tracking for any WoW character, with no Battle.net login.</p>
+                <dl class="spec spec-mini">
+                    <div><dt>Type</dt><dd>Web + desktop app</dd></div>
+                    <div><dt>Stack</dt><dd>TypeScript · Next.js · Electron</dd></div>
+                    <div><dt>Focus</dt><dd>Blizzard OAuth, profile storage</dd></div>
+                </dl>
+                <span class="card-cta">
+                    Details
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+                </span>
+            </article>
+
+            <article class="mini-card glass" data-reveal style="--d:160ms" data-spotlight
+                     data-project
+                     data-title="Gi(t/st)"
+                     data-status="shipped"
+                     data-role="Solo build"
+                     data-type="Desktop app"
+                     data-stack="C++17 · Win32 · GDI+"
+                     data-focus="Commit DAG layout, WinHTTP"
+                     data-desc="A native Windows app that renders a repository's full branch history as a navigable graph. Paste a GitHub or GitLab URL in almost any form and it unions commits from every branch into one DAG, then lays it out the way mature history viewers do — first-parent chains stay in a straight column while merges curve cleanly, the default branch always keeps a reserved blue, and rendering is virtualised so thousands of commits scroll smoothly. No browser, no bundled runtime, no third-party DLLs."
+                     data-techs="C++17,Win32,GDI+,WinHTTP,nlohmann/json,CMake"
+                     data-repo="https://github.com/SC0R9I0N/Gi-t-st"
+                     tabindex="0" role="button" aria-label="Gi(t/st) — view details">
+                <div class="mini-top">
+                    <span class="mini-index">03</span>
+                    <span class="chip-status shipped">Shipped</span>
+                </div>
+                <h3>Gi(t/st)</h3>
+                <p>Native Windows viewer that draws a repo's whole multi-branch commit graph.</p>
+                <dl class="spec spec-mini">
+                    <div><dt>Type</dt><dd>Desktop app</dd></div>
+                    <div><dt>Stack</dt><dd>C++17 · Win32 · GDI+</dd></div>
+                    <div><dt>Focus</dt><dd>Commit DAG layout, WinHTTP</dd></div>
+                </dl>
+                <span class="card-cta">
+                    Details
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+                </span>
+            </article>
+
+            <article class="mini-card glass" data-reveal style="--d:240ms" data-spotlight
+                     data-project
+                     data-title="RISC-V CPU Simulator"
+                     data-status="complete"
+                     data-role="Course project"
+                     data-type="Architecture simulator"
+                     data-stack="C++ · Make"
+                     data-focus="Tomasulo, ROB, branch prediction"
+                     data-desc="A functional and timing simulator for a speculative, multi-issue, out-of-order CPU, written for CS 2410 at Pitt. It executes a ten-instruction RISC-V subset through a 4-wide fetch, decode, dispatch and writeback pipeline: per-unit reservation stations with real latencies, a reorder buffer for in-order commit, and a 2-bit dynamic branch predictor over a 16-entry BTB. Stall accounting separates reservation-station pressure from ROB pressure so bottlenecks are attributable."
+                     data-techs="C++,RISC-V,Tomasulo,Reorder Buffer,Branch Prediction,OpenXLSX,Make"
+                     data-repo="https://github.com/SC0R9I0N/cpu-simulator"
+                     tabindex="0" role="button" aria-label="RISC-V CPU Simulator — view details">
+                <div class="mini-top">
+                    <span class="mini-index">04</span>
+                    <span class="chip-status complete">Complete</span>
+                </div>
+                <h3>RISC-V CPU Simulator</h3>
+                <p>Out-of-order speculative CPU simulator with reservation stations and a reorder buffer.</p>
+                <dl class="spec spec-mini">
+                    <div><dt>Type</dt><dd>Architecture simulator</dd></div>
+                    <div><dt>Stack</dt><dd>C++ · Make</dd></div>
+                    <div><dt>Focus</dt><dd>Tomasulo, ROB, branch prediction</dd></div>
+                </dl>
+                <span class="card-cta">
+                    Details
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+                </span>
+            </article>
+
+            <article class="mini-card glass" data-reveal style="--d:320ms" data-spotlight
+                     data-project
+                     data-title="SportNet"
+                     data-status="complete"
+                     data-type="ML model"
+                     data-stack="Python · PyTorch"
+                     data-focus="2D athlete pose, T5 explainer"
+                     data-desc="A 2D athlete pose-estimation pipeline trained on the AthletePose3D dataset. The backbone adapts MogaNet with an MMPose-style heatmap head to predict keypoints, and a T5 semantic explainer turns those predictions into readable descriptions of what the athlete's body is doing — so the model outputs an explanation rather than only coordinates."
+                     data-techs="Python,PyTorch,timm,Transformers,T5,OpenCV,NLTK"
+                     data-repo="https://github.com/SC0R9I0N/SportNet"
+                     tabindex="0" role="button" aria-label="SportNet — view details">
+                <div class="mini-top">
+                    <span class="mini-index">05</span>
+                    <span class="chip-status complete">Complete</span>
+                </div>
+                <h3>SportNet</h3>
+                <p>Athlete pose estimation with a T5 head that explains the pose in words.</p>
+                <dl class="spec spec-mini">
+                    <div><dt>Type</dt><dd>ML model</dd></div>
+                    <div><dt>Stack</dt><dd>Python · PyTorch</dd></div>
+                    <div><dt>Focus</dt><dd>2D athlete pose, T5 explainer</dd></div>
+                </dl>
+                <span class="card-cta">
+                    Details
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+                </span>
+            </article>
+
+            <article class="mini-card glass" data-reveal style="--d:0ms" data-spotlight
+                     data-project
+                     data-title="StegoForge"
+                     data-status="planned"
+                     data-role="Solo build"
+                     data-type="CLI toolkit"
+                     data-stack="Rust"
+                     data-focus="Steganography, cryptography"
+                     data-desc="A planned Rust application for seamless steganography — hiding payloads inside ordinary files and retrieving the message or password back out. The repository is currently a stub while the design is worked out."
+                     data-techs="Rust,Cryptography,File I/O,Algorithms"
+                     data-repo="https://github.com/SC0R9I0N/StegoForge"
+                     tabindex="0" role="button" aria-label="StegoForge — view details">
+                <div class="mini-top">
+                    <span class="mini-index">06</span>
+                    <span class="chip-status planned">Planned</span>
+                </div>
+                <h3>StegoForge</h3>
+                <p>Planned steganography tool for hiding and retrieving payloads inside ordinary files.</p>
+                <dl class="spec spec-mini">
+                    <div><dt>Type</dt><dd>CLI toolkit</dd></div>
+                    <div><dt>Stack</dt><dd>Rust</dd></div>
+                    <div><dt>Focus</dt><dd>Steganography, cryptography</dd></div>
+                </dl>
+                <span class="card-cta">
+                    Details
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+                </span>
+            </article>
+
+            <article class="mini-card glass" data-reveal style="--d:80ms" data-spotlight
+                     data-project
+                     data-title="D&amp;D Character Creator"
+                     data-status="building"
+                     data-role="Solo build"
+                     data-type="CLI tool"
+                     data-stack="Bash"
+                     data-focus="Character sheets, campaign prep"
+                     data-desc="A Bash script that walks you through the whole D&amp;D character creation process — backstory, alignment, and everything else D&amp;D Beyond asks for — then prints a character sheet for a given level. Built so my own campaigns run on my own software instead of a printed sheet and a pencil."
+                     data-techs="Bash,Shell Scripting,CLI,D&amp;D 5e"
+                     data-repo="https://github.com/SC0R9I0N/DND-character-creator"
+                     tabindex="0" role="button" aria-label="D&amp;D Character Creator — view details">
+                <div class="mini-top">
+                    <span class="mini-index">07</span>
+                    <span class="chip-status building">WIP</span>
+                </div>
+                <h3>D&amp;D Character Creator</h3>
+                <p>A Bash script that walks you through character creation and prints the sheet.</p>
+                <dl class="spec spec-mini">
+                    <div><dt>Type</dt><dd>CLI tool</dd></div>
+                    <div><dt>Stack</dt><dd>Bash</dd></div>
+                    <div><dt>Focus</dt><dd>Character sheets, campaign prep</dd></div>
+                </dl>
+                <span class="card-cta">
+                    Details
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+                </span>
+            </article>
+
+            <article class="mini-card glass" data-reveal style="--d:160ms" data-spotlight
+                     data-project
+                     data-title="Rust Ray Tracer"
+                     data-status="planned"
+                     data-role="Solo build"
+                     data-type="Renderer"
+                     data-stack="Rust"
+                     data-focus="Ray tracing, scene configuration"
+                     data-desc="A planned standalone ray-tracing simulator in Rust, starting from the classic point-light-and-sphere demo and expanding it into a configurable scene — additional objects of different shapes, and settings rich enough to simulate more than one occluder."
+                     data-techs="Rust,Graphics,Ray Tracing,Linear Algebra"
+                     data-repo="https://github.com/SC0R9I0N/ray-tracing-rust"
+                     tabindex="0" role="button" aria-label="Rust Ray Tracer — view details">
+                <div class="mini-top">
+                    <span class="mini-index">08</span>
+                    <span class="chip-status planned">Planned</span>
+                </div>
+                <h3>Rust Ray Tracer</h3>
+                <p>Planned ray-tracing simulator that grows a light-and-sphere demo into full scenes.</p>
+                <dl class="spec spec-mini">
+                    <div><dt>Type</dt><dd>Renderer</dd></div>
+                    <div><dt>Stack</dt><dd>Rust</dd></div>
+                    <div><dt>Focus</dt><dd>Ray tracing, scene configuration</dd></div>
+                </dl>
+                <span class="card-cta">
+                    Details
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+                </span>
+            </article>
+
+            <article class="mini-card glass" data-reveal style="--d:240ms" data-spotlight
+                     data-project
+                     data-title="Brainf**k IDE"
+                     data-status="planned"
+                     data-role="Solo build"
+                     data-type="IDE + debugger"
+                     data-stack="Rust or Java (undecided)"
+                     data-focus="Compiler, debugger, packaging"
+                     data-desc="A planned IDE for Brainf**k bundling a compiler and a debugger into a single downloadable application, rather than making people fetch each file by hand. The implementation language is still an open question between Rust and Java."
+                     data-techs="Compiler Design,Debuggers,IDE Tooling"
+                     data-repo="https://github.com/SC0R9I0N/Brainfuck-IDE"
+                     tabindex="0" role="button" aria-label="Brainf**k IDE — view details">
+                <div class="mini-top">
+                    <span class="mini-index">09</span>
+                    <span class="chip-status planned">Planned</span>
+                </div>
+                <h3>Brainf**k IDE</h3>
+                <p>Planned single-download IDE for Brainf**k, compiler and debugger included.</p>
+                <dl class="spec spec-mini">
+                    <div><dt>Type</dt><dd>IDE + debugger</dd></div>
+                    <div><dt>Stack</dt><dd>Rust or Java (undecided)</dd></div>
+                    <div><dt>Focus</dt><dd>Compiler, debugger, packaging</dd></div>
+                </dl>
+                <span class="card-cta">
+                    Details
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+                </span>
+            </article>
+
+            <article class="mini-card glass" data-reveal style="--d:320ms" data-spotlight
+                     data-project
+                     data-title="Asteroid"
+                     data-status="planned"
+                     data-role="Solo build"
+                     data-type="Arcade game"
+                     data-stack="Rust"
+                     data-focus="Vector physics, no engine"
+                     data-desc="A planned arcade asteroid shooter in Rust — vector physics, wrapping world space, and rocks that fracture when you hit them, written without a game engine."
+                     data-techs="Rust,Game Dev,Graphics,Physics"
+                     data-repo="https://github.com/SC0R9I0N/asteroid-rust"
+                     tabindex="0" role="button" aria-label="Asteroid — view details">
+                <div class="mini-top">
+                    <span class="mini-index">10</span>
+                    <span class="chip-status planned">Planned</span>
+                </div>
+                <h3>Asteroid</h3>
+                <p>Planned arcade shooter in Rust with vector physics and fracturing rocks.</p>
+                <dl class="spec spec-mini">
+                    <div><dt>Type</dt><dd>Arcade game</dd></div>
+                    <div><dt>Stack</dt><dd>Rust</dd></div>
+                    <div><dt>Focus</dt><dd>Vector physics, no engine</dd></div>
+                </dl>
+                <span class="card-cta">
+                    Details
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+                </span>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ============ EXTRAS ============ -->
+<section id="extras" class="section">
+    <div class="shell">
+        <div class="section-head">
+            <div>
+                <span class="eyebrow" data-reveal="fade">03 — Elsewhere</span>
+                <h2 class="section-title" data-reveal>Extras</h2>
+            </div>
+            <p class="section-note" data-reveal style="--d:120ms">
+                Other places I spend time when I'm not writing code.
+            </p>
+        </div>
+
+        <div class="extras-grid">
+            <a href="https://github.com/SC0R9I0N" target="_blank" rel="noopener" class="extra-card glass" data-reveal data-spotlight>
+                <img src="main_gallery/github.svg" alt="" loading="lazy">
+                <div>
+                    <h3>GitHub</h3>
+                    <p>@SC0R9I0N</p>
+                </div>
+                <span class="ext"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+            </a>
+
+            <a href="https://www.chess.com/member/sc0r9i0n" target="_blank" rel="noopener" class="extra-card glass" data-reveal style="--d:100ms" data-spotlight>
+                <img src="main_gallery/chess.png" alt="" loading="lazy">
+                <div>
+                    <h3>Chess.com</h3>
+                    <p>@sc0r9i0n</p>
+                </div>
+                <span class="ext"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+            </a>
+
+            <a href="https://www.boot.dev/u/sc0r9i0n" target="_blank" rel="noopener" class="extra-card glass" data-reveal style="--d:200ms" data-spotlight>
+                <img src="main_gallery/bootdev.png" alt="" loading="lazy">
+                <div>
+                    <h3>Boot.dev</h3>
+                    <p>@sc0r9i0n</p>
+                </div>
+                <span class="ext"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+            </a>
+
+            <a href="https://linkedin.com/in/garrett-reihner" target="_blank" rel="noopener" class="extra-card glass" data-reveal style="--d:300ms" data-spotlight>
+                <span class="extra-glyph" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05a3.75 3.75 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+                </span>
+                <div>
+                    <h3>LinkedIn</h3>
+                    <p>garrett-reihner</p>
+                </div>
+                <span class="ext"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+            </a>
+
+            <a href="https://rivalsmeta.com/player/991340987" target="_blank" rel="noopener" class="extra-card glass" data-reveal style="--d:400ms" data-spotlight>
+                <img src="main_gallery/rivals.png" alt="" loading="lazy">
+                <div>
+                    <h3>Marvel Rivals</h3>
+                    <p>Match stats</p>
+                </div>
+                <span class="ext"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+            </a>
+
+            <a href="https://worldofwarcraft.blizzard.com/en-us/worldsoul/us/armory/character/destromath/scrapcon" target="_blank" rel="noopener" class="extra-card glass" data-reveal style="--d:500ms" data-spotlight>
+                <img src="main_gallery/world-of-warcraft.png" alt="" loading="lazy">
+                <div>
+                    <h3>World of Warcraft</h3>
+                    <p>Scrapcon · Destromath</p>
+                </div>
+                <span class="ext"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ============ TRAVEL ============ -->
+<section id="travel" class="section">
+    <div class="shell">
+        <div class="section-head">
+            <div>
+                <span class="eyebrow" data-reveal="fade">04 — Offline</span>
+                <h2 class="section-title" data-reveal>Travel</h2>
+            </div>
+            <p class="section-note" data-reveal style="--d:120ms">
+                Photo galleries from the places I've been, grouped by region.
+            </p>
+        </div>
+
+        <div class="travel-grid">
+            <a href="travel/europe.html" class="travel-card glass" data-reveal data-spotlight>
+                <span class="art art--europe" aria-hidden="true">
+                    <!-- old-town rooftops rising into a twin-spired cathedral -->
+                    <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMax slice" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M0 140h400" opacity=".16"/>
+                    <path d="M6 140v-34l20-16 20 16v34"/>
+                    <path d="M46 140v-26l17-13 17 13v26"/>
+                    <path d="M168 140V64l16-28 16 28v76"/><path d="M184 36V16"/>
+                    <path d="M232 140V64l16-28 16 28v76"/><path d="M248 36V16"/>
+                    <path d="M200 140V72h32v68"/>
+                    <circle cx="216" cy="96" r="12"/>
+                    <path d="M204 96h24M216 84v24M208 88l16 16M224 88l-16 16" opacity=".55"/>
+                    <path d="M206 140v-18a10 10 0 0 1 20 0v18"/>
+                    <path d="M300 140v-30l19-15 19 15v30"/>
+                    <path d="M348 140v-22l16-12 16 12v22"/>
+                    </svg>
+                </span>
+                <span class="travel-region">Region 01</span>
+                <h3>Europe</h3>
+                <p>Old cities, long train rides, too many cathedrals.</p>
+                <span class="travel-open">Open gallery
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </span>
+            </a>
+
+            <a href="travel/middle-east.html" class="travel-card glass" data-reveal style="--d:80ms" data-spotlight>
+                <span class="art art--mideast" aria-hidden="true">
+                    <!-- girih lattice over domes, minarets and dunes -->
+                    <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMax slice" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <defs>
+                    <pattern id="art-girih" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+                    <path d="M15 2 18.6 11.4 28 15 18.6 18.6 15 28 11.4 18.6 2 15 11.4 11.4Z" stroke-width=".9"/>
+                    <path d="M15 7 23 15 15 23 7 15Z" stroke-width=".5" opacity=".5"/>
+                    </pattern>
+                    </defs>
+                    <rect x="0" y="-4" width="400" height="76" fill="url(#art-girih)" stroke="none" opacity=".45"/>
+                    <path d="M0 140h400" opacity=".16"/>
+                    <path d="M78 140V72h13v68"/><path d="M84.5 72V60l-5-9h10l-5 9"/>
+                    <path d="M150 140v-24a52 30 0 0 1 104 0v24"/><path d="M202 86V68"/>
+                    <path d="M176 140v-14a26 16 0 0 1 52 0"/>
+                    <path d="M300 140V80h12v60"/><path d="M306 80V69l-5-8h10l-5 8"/>
+                    <path d="M0 132c60-16 106 8 164-4s108-18 236 4" opacity=".4"/>
+                    </svg>
+                </span>
+                <span class="travel-region">Region 02</span>
+                <h3>Middle East</h3>
+                <p>Desert light, ancient stone, unreasonably good food.</p>
+                <span class="travel-open">Open gallery
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </span>
+            </a>
+
+            <a href="travel/africa.html" class="travel-card glass" data-reveal style="--d:160ms" data-spotlight>
+                <span class="art art--africa" aria-hidden="true">
+                    <!-- acacia against a low sun on open savanna -->
+                    <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMax slice" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle class="sun" cx="312" cy="64" r="36"/>
+                    <path d="M276 54h72M276 64h72M276 74h72" opacity=".35"/>
+                    <path d="M0 140h400" opacity=".16"/>
+                    <path d="M116 140V78"/>
+                    <path d="M116 100l-20-14M116 108l22-16" opacity=".75"/>
+                    <path d="M64 78c13-24 40-30 52-17 15-13 42-6 52 17Z"/>
+                    <path d="M72 78h88" opacity=".45"/>
+                    <path d="M228 140v-30M228 120l-12-9M228 126l14-10" opacity=".75"/>
+                    <path d="M200 110c8-14 24-19 32-11 9-8 25-3 32 11Z"/>
+                    <path d="M0 130c68-9 126 7 194 0s126-10 206 4" opacity=".3"/>
+                    </svg>
+                </span>
+                <span class="travel-region">Region 03</span>
+                <h3>Africa</h3>
+                <p>Wide horizons and the best skies I've stood under.</p>
+                <span class="travel-open">Open gallery
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </span>
+            </a>
+
+            <a href="travel/americas.html" class="travel-card glass" data-reveal style="--d:240ms" data-spotlight>
+                <span class="art art--americas" aria-hidden="true">
+                    <!-- stepped pyramid beneath an Andean fret band -->
+                    <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMax slice" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <defs>
+                    <pattern id="art-fret" x="0" y="0" width="40" height="26" patternUnits="userSpaceOnUse">
+                    <path d="M2 24V10h12V2h12v8h12v14" stroke-width="1.1"/>
+                    </pattern>
+                    </defs>
+                    <rect x="0" y="8" width="400" height="26" fill="url(#art-fret)" stroke="none" opacity=".4"/>
+                    <path d="M0 140h400" opacity=".16"/>
+                    <path d="M120 140l20-24h120l20 24"/>
+                    <path d="M140 116l15-22h90l15 22"/>
+                    <path d="M155 94l13-20h64l13 20"/>
+                    <path d="M168 74l12-18h40l12 18"/>
+                    <path d="M186 140v-24M214 140v-24M186 116h28" opacity=".5"/>
+                    <path d="M192 56v-10h16v10" opacity=".75"/>
+                    <path d="M10 140v-22M26 140v-30M42 140v-18" opacity=".28"/>
+                    <path d="M356 140v-26M372 140v-18M388 140v-30" opacity=".28"/>
+                    </svg>
+                </span>
+                <span class="travel-region">Region 04</span>
+                <h3>Central &amp; South America</h3>
+                <p>Rainforest, ruins, and altitude that humbles you.</p>
+                <span class="travel-open">Open gallery
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </span>
+            </a>
+
+            <a href="travel/asia-oceania.html" class="travel-card glass" data-reveal style="--d:320ms" data-spotlight>
+                <span class="art art--asia" aria-hidden="true">
+                    <!-- a torii standing in seigaiha water below a ridgeline -->
+                    <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMax slice" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <defs>
+                    <pattern id="art-wave" x="0" y="0" width="36" height="18" patternUnits="userSpaceOnUse">
+                    <path d="M-18 18a18 18 0 0 1 36 0M18 18a18 18 0 0 1 36 0" stroke-width="1"/>
+                    <path d="M-9 18a9 9 0 0 1 18 0M27 18a9 9 0 0 1 18 0" stroke-width=".6" opacity=".5"/>
+                    </pattern>
+                    </defs>
+                    <circle cx="318" cy="58" r="28"/>
+                    <path d="M18 128l74-74 32 34 20-22 46 62"/>
+                    <path d="M74 90h38" opacity=".45"/>
+                    <path d="M252 140V78M328 140V78"/>
+                    <path d="M240 78h100M244 66h92"/>
+                    <path d="M246 58c16-6 84-6 100 0"/>
+                    <path d="M282 78V66M298 78V66" opacity=".5"/>
+                    <rect x="0" y="124" width="400" height="34" fill="url(#art-wave)" stroke="none" opacity=".4"/>
+                    </svg>
+                </span>
+                <span class="travel-region">Region 05</span>
+                <h3>Asia &amp; Oceania</h3>
+                <p>Neon side streets and coastline in the same week.</p>
+                <span class="travel-open">Open gallery
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </span>
+            </a>
+
+            <a href="travel/antarctica.html" class="travel-card glass" data-reveal style="--d:400ms" data-spotlight>
+                <span class="art art--antarctica" aria-hidden="true">
+                    <!-- aurora ribbons over an iceberg at the waterline -->
+                    <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMax slice" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <g class="aurora">
+                    <path d="M-20 44c60-30 118 10 178-12s118-26 262 8" stroke-width="1.2"/>
+                    <path d="M-20 62c70-26 114 16 184-8s112-22 256 12" stroke-width="1" opacity=".7"/>
+                    <path d="M-20 80c80-22 108 20 188-4s108-16 252 12" stroke-width=".8" opacity=".45"/>
+                    </g>
+                    <path d="M118 140l46-64 30 40 26-24 40 48z"/>
+                    <path d="M164 76l16 64M194 116l-14 24" opacity=".4"/>
+                    <path d="M0 140h400" opacity=".32"/>
+                    <path d="M20 152h40M312 148h50M272 160h40" opacity=".25"/>
+                    </svg>
+                </span>
+                <span class="travel-region">Region 06</span>
+                <h3>Antarctica</h3>
+                <p>The one everybody asks about. Yes, it's that cold.</p>
+                <span class="travel-open">Open gallery
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ============ CHANGELOG ============ -->
+<section id="changelog" class="section">
+    <div class="shell">
+        <div class="section-head">
+            <div>
+                <span class="eyebrow" data-reveal="fade">05 — History</span>
+                <h2 class="section-title" data-reveal>Changelog</h2>
+            </div>
+            <p class="section-note" data-reveal style="--d:120ms">
+                This site is a project too. Here's every change to it.
+            </p>
+        </div>
+
+        <div class="changelog-wrap" data-reveal>
+            <div class="changelog-scroll" id="changelog-scroll" tabindex="0" role="region" aria-label="Changelog history">
+                <div class="timeline">
+                    <div class="log-entry is-latest">
+                        <span class="log-date">2026-08-30</span>
+                        <span class="log-text">Added Marvel Rivals and World of Warcraft profiles to Extras</span>
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-date">2026-08-30</span>
+                        <span class="log-text">Added a boot-sequence intro that runs on every visit</span>
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-date">2026-08-30</span>
+                        <span class="log-text">Resynced every project against its repository; added NeuroMesh, WoW Collector, Gi(t/st), the RISC-V simulator and SportNet</span>
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-date">2026-08-30</span>
+                        <span class="log-text">Swapped AVENDRA for the Skyblock Item Browser</span>
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-date">2026-08-30</span>
+                        <span class="log-text">Replaced project screenshots and logos with spec plates</span>
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-date">2026-08-30</span>
+                        <span class="log-text">Portfolio 2.0 Release</span>
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-date">2026-08-30</span>
+                        <span class="log-text">Removed the contact form in favour of direct links</span>
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-date">2026-08-13</span>
+                        <span class="log-text">Finished internship at GDMS, back to work on my projects</span>
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-date">2026-05-25</span>
+                        <span class="log-text">Added flagship project section</span>
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-date">2026-05-24</span>
+                        <span class="log-text">Added a card popup for projects</span>
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-date">2026-05-18</span>
+                        <span class="log-text">On break for my internship at GDMS</span>
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-date">2026-04-20</span>
+                        <span class="log-text">Made the changelog scrollable</span>
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-date">2026-04-20</span>
+                        <span class="log-text">Added changelog section to website</span>
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-date">2026-04-16</span>
+                        <span class="log-text">Fixed project card visualisation</span>
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-date">2026-04-14</span>
+                        <span class="log-text">Portfolio 1.0 Release</span>
+                    </div>
+                </div>
+            </div>
+            <div class="changelog-bar" id="changelog-bar" aria-hidden="true"><span></span></div>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+    <div class="shell">
+        <div class="footer-top">
+            <p class="footer-lead" data-reveal>
+                Building things that <span class="grad">shouldn't be this hard.</span>
+            </p>
+            <div class="footer-links" data-reveal style="--d:120ms">
+                <a href="https://github.com/SC0R9I0N" target="_blank" rel="noopener" class="btn btn-ghost btn-sm" data-magnetic>GitHub</a>
+                <a href="https://linkedin.com/in/garrett-reihner" target="_blank" rel="noopener" class="btn btn-ghost btn-sm" data-magnetic>LinkedIn</a>
+                <a href="https://www.boot.dev/u/sc0r9i0n" target="_blank" rel="noopener" class="btn btn-ghost btn-sm" data-magnetic>Boot.dev</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>© <span id="year">2026</span> Garrett Reihner — built from scratch, no framework.</span>
+            <a href="#top" class="back-top">
+                Back to top
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+            </a>
+        </div>
+    </div>
+</footer>
+
+<!-- ============ PROJECT MODAL ============ -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel">
+        <button class="modal-close" data-close aria-label="Close">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+
+        <div class="modal-plate plate">
+            <div class="plate-top">
+                <span class="status-chip" id="modal-status"></span>
+            </div>
+            <h2 id="modal-title"></h2>
+            <dl class="spec" id="modal-spec"></dl>
+        </div>
+
+        <div class="modal-body">
+            <p id="modal-desc"></p>
+
+            <p class="modal-section-label">Stack</p>
+            <div class="tech-list" id="modal-techs"></div>
+
+            <div class="modal-actions">
+                <a id="modal-repo" href="#" target="_blank" rel="noopener" class="btn btn-primary" data-magnetic>
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.53-1.35-1.29-1.71-1.29-1.71-1.06-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.04 1.79 2.74 1.27 3.4.97.11-.76.41-1.28.74-1.57-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.3-.52-1.47.11-3.07 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.6.24 2.77.12 3.07.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.27 5.69.42.36.8 1.08.8 2.19v3.25c0 .31.2.67.8.55A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
+                    View repository
+                </a>
+                <a id="modal-live" href="#" target="_blank" rel="noopener" class="btn btn-ghost" style="display:none">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18"/></svg>
+                    Visit live site
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
-
